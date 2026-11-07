@@ -187,6 +187,22 @@ function run(args) {
     lastFacingChange = now;
     view.evaluateJavaScriptCompletionHandler('faceTravel(' + facing + ')', () => {});
   }
+  let lastClockCheck = 0;
+  let clockCheckPending = false;
+  let clockWasStalled = false;
+  function checkArtworkClock(now) {
+    const interval = clockWasStalled ? 45 : 500;
+    if (clockCheckPending || now - lastClockCheck < interval) return;
+    clockCheckPending = true;
+    lastClockCheck = now;
+    view.evaluateJavaScriptCompletionHandler('checkWalkClock(' + now + ')', (result, error) => {
+      clockCheckPending = false;
+      if (error && !error.isNil()) return;
+      const stalled = Boolean(ObjC.unwrap(result));
+      if (stalled && !clockWasStalled) console.log(name + ': resumed stalled walking animation');
+      clockWasStalled = stalled;
+    });
+  }
   let lastTick = Date.now();
   let glideY = null;
   function advanceGlide() {
@@ -201,6 +217,7 @@ function run(args) {
       view.evaluateJavaScriptCompletionHandler('aimEyes(' + x + ',' + y + ')', () => {});
     }
     if (!anchor && state === 'walk') {
+      checkArtworkClock(now);
       const bounds = window.screen.visibleFrame;
       const origin = window.frame.origin;
       const left = bounds.origin.x, right = left + bounds.size.width - width;

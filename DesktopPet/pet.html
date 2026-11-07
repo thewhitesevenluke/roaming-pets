@@ -39,7 +39,7 @@
 [data-state=watch] .bat-pupils{transform:translate(var(--gaze-x,0px),var(--gaze-y,0px));transition:transform .22s ease-out}
 .bat .animal-lids{transform-origin:230px 235px}
 .wing{transform-origin:201px 278px;animation:flap .55s ease-in-out infinite alternate}
-[data-state=wave] .wing{animation-duration:.25s}
+[data-state=wave] .wing{animation:batWave .32s ease-in-out infinite alternate}
 [data-state=sleep] .wing{animation:foldWing .8s ease-out both,dozingWing 3s .8s ease-in-out infinite}
 @keyframes foldWing{to{transform:rotate(-32deg) scale(.46,.82)}}
 @keyframes dozingWing{0%,100%{transform:rotate(-32deg) scale(.46,.82)}50%{transform:rotate(-28deg) scale(.49,.83)}}
@@ -51,7 +51,6 @@
 [data-state=sleep] .bat .animal-lids{visibility:visible;animation:batClose .45s ease-out both}
 [data-state=sleep] .bat .shut{animation:closeEyes .45s ease-in both}
 @keyframes batClose{to{transform:scaleY(.04);opacity:0}}
-[data-state=wave] .bat .right{animation:batWave .32s ease-in-out infinite alternate}
 @keyframes batWave{from{transform:rotate(-15deg)}to{transform:rotate(32deg)}}
 
 .skeleton .animal-lids{transform-origin:230px 145px}
@@ -162,7 +161,7 @@
 @keyframes hedgeStep{from{transform:rotate(-9deg)}to{transform:rotate(11deg) translateY(-3px)}}
 @keyframes hedgeRoll{0%{transform:scale(.75);opacity:0}15%{transform:scale(1);opacity:1}85%{transform:scale(1) rotate(-360deg);opacity:1}100%{transform:scale(.85) rotate(-360deg);opacity:0}}
 </style>
-<body data-pet="ghosty">
+<body data-pet="ghosty" data-state="walk">
 <button id="pet" aria-label="Ghosty. Click to wave, drag to move, or right-click for actions." title="Ghosty · Click to wave · Drag to move · Right-click for actions">
 <span class="travel-facing">
 <svg viewBox="0 0 460 518" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink">

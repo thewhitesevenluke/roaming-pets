@@ -31,8 +31,8 @@ for (const name of ['Ghosty', 'Bat', 'Skeleton', 'Bunny', 'Turtle', 'Hedgehog'])
   <key>CFBundleExecutable</key><string>${name}</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>LSMinimumSystemVersion</key><string>11.0</string>
-  <key>CFBundleVersion</key><string>8</string>
-  <key>CFBundleShortVersionString</key><string>1.6.0</string>
+  <key>CFBundleVersion</key><string>9</string>
+  <key>CFBundleShortVersionString</key><string>1.6.1</string>
   <key>LSUIElement</key><true/>
   </dict></plist>
   `);

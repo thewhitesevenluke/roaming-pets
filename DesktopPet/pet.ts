@@ -3,12 +3,41 @@ const duration = { wave: 1600, boo: 850, look: 900, watch: 1000, wake: 1200, gro
 let restingMode: 'walk' | 'idle' = 'walk';
 let timer = 0;
 
+// A floating window can be open while another app has focus. Check that
+// WebKit is advancing the visible pet's CSS animations in that state.
+let walkClock = new Map<Animation, number>();
+let lastWalkSample = 0;
+function checkWalkClock(now: number): boolean {
+  if (document.title !== 'walk') return false;
+  const svg = pet.querySelector('svg')!;
+  const visiblePet = svg.querySelector('.' + document.body.dataset.pet)!;
+  const animations = [...svg.getAnimations(), ...visiblePet.getAnimations({ subtree: true })];
+  const elapsed = Math.min(now - lastWalkSample, 500);
+  const next = new Map<Animation, number>();
+  let recovered = false;
+  for (const animation of animations) {
+    if (animation.playState === 'finished' || animation.playState === 'idle') continue;
+    const time = animation.currentTime;
+    if (typeof time !== 'number') continue;
+    if (walkClock.get(animation) === time && elapsed > 0) {
+      animation.currentTime = time + elapsed;
+      recovered = true;
+    }
+    next.set(animation, Number(animation.currentTime));
+  }
+  lastWalkSample = now;
+  walkClock = next;
+  return recovered;
+}
+
 function updateLabel() {
   const kind = document.body.dataset.pet || 'ghosty';
   pet.setAttribute('aria-label', kind + '. ' + pet.title);
 }
 
 function play(state: PetState) {
+  walkClock.clear();
+  lastWalkSample = 0;
   if (state === 'sleep') {
     const svg = pet.querySelector('svg')!;
     const transform = getComputedStyle(svg).transform;
