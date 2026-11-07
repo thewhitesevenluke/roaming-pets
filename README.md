@@ -2,7 +2,7 @@
 
 Little roaming desktop pets for your Mac. Ghosty waves and watches your cursor, Bat flies and hangs upside down to sleep, and Tiny Skeleton folds into a pile of bones to nap.
 
-The General pack starts with Bunny, a cream-colored rabbit that hops, sniffs, and does a little twisting jump called a binky.
+The General pack starts with Bunny, a cream-colored rabbit that roams, sniffs, and does a little twisting jump called a binky.
 
 ## Get the pets
 

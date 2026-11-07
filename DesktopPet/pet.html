@@ -83,15 +83,10 @@
 [data-pet=bunny] .ghosty{display:none}
 [data-pet=bunny] .bunny{display:inline}
 .bunny .animal-lids{transform-origin:202px 232px}
-[data-pet=bunny][data-state=walk] svg{animation:bunnyHop .84s ease-in-out infinite}
+[data-pet=bunny][data-state=walk] svg{animation:none}
 .rabbit-ear,.rabbit-front,.rabbit-back,.rabbit-head{transition:transform .6s ease-in-out}
 .near-ear{transform-origin:181px 187px}.rear-ear{transform-origin:232px 186px}
-.rabbit-front,.rabbit-back{transform-origin:0 0}.rabbit-head{transform-origin:205px 268px}
-[data-state=walk] .rabbit-front{animation:catchHop .84s ease-in-out infinite}
-[data-state=walk] .rabbit-back{animation:pushHop .84s ease-in-out infinite}
-@keyframes catchHop{0%,100%{transform:none}55%{transform:translate(-3px,2px) rotate(6deg)}}
-@keyframes pushHop{0%,100%{transform:none}40%{transform:translate(3px,3px) rotate(-8deg)}65%{transform:translateY(-2px)}}
-[data-state=walk] .rabbit-ear{animation:earBounce .84s ease-in-out infinite}
+.rabbit-front{transform-origin:185px 317px}.rabbit-back{transform-origin:300px 295px}.rabbit-head{transform-origin:205px 268px}
 [data-state=watch] .near-ear{transform:rotate(calc(var(--ear-angle,0) * 1deg))}
 :is([data-state=look],[data-state=watch],[data-state=idle]) .rabbit-nose{animation:sniff .3s ease-in-out infinite alternate}
 [data-state=sleep] .rabbit-front{transform:translateY(-4px) scaleY(.85)}
@@ -101,11 +96,26 @@
 [data-state=sleep] .rear-ear{transform:rotate(52deg)}
 [data-state=wave] .rabbit-paw{animation:bunnyWave .35s ease-in-out infinite alternate}
 [data-pet=bunny][data-state=boo] svg{animation:binky .85s ease-in-out both}
-@keyframes bunnyHop{0%,100%{transform:none}23%{transform:translateY(1px) scaleY(.97)}55%{transform:translateY(-9px) rotate(-3deg)}}
-@keyframes earBounce{55%{transform:rotate(7deg)}}
 @keyframes sniff{to{transform:translateY(-4px)}}
-@keyframes bunnyWave{from{transform:translate(-12px,-5px) rotate(12deg)}to{transform:translate(-20px,-13px) rotate(30deg)}}
+@keyframes bunnyWave{from{transform:rotate(20deg)}to{transform:rotate(43deg)}}
 @keyframes binky{0%,100%{transform:none}20%{transform:scaleY(.94)}50%{transform:translateY(-15px) rotate(-13deg)}72%{transform:translateY(-6px) rotate(7deg)}}
+
+.wash-paw{display:none;transform-origin:169px 311px}
+[data-pet=bunny]:is([data-state=groom],[data-state=listen]) svg{animation:none}
+[data-state=walk] .rear-ear{animation:earFlick 6.8s ease-in-out infinite}
+[data-state=groom] .rabbit-paw{visibility:hidden}
+[data-state=groom] .wash-paw{display:inline;animation:washFace 2s ease-in-out both}
+[data-state=groom] .rabbit-head{transform:rotate(-5deg)}
+[data-state=listen] .rabbit-head{animation:listenTilt 1.6s ease-in-out both}
+[data-state=listen] .near-ear{animation:listenEar 1.6s ease-in-out both}
+@keyframes earFlick{0%,78%,90%,100%{transform:none}82%{transform:rotate(13deg)}86%{transform:rotate(-4deg)}}
+@keyframes washFace{
+  0%,100%{opacity:0;transform:rotate(-38deg) scaleY(.55)}
+  22%,55%,80%{opacity:1;transform:rotate(1deg) scaleY(.91)}
+  38%,67%{opacity:1;transform:rotate(6deg) scaleY(1.04)}
+}
+@keyframes listenTilt{0%,100%{transform:none}30%,74%{transform:rotate(9deg)}}
+@keyframes listenEar{0%,100%{transform:none}28%,72%{transform:rotate(-15deg)}}
 </style>
 <body data-pet="ghosty">
 <button id="pet" aria-label="Ghosty. Click to wave, drag to move, or right-click for actions." title="Ghosty · Click to wave · Drag to move · Right-click for actions">

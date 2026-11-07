@@ -1,5 +1,5 @@
-type PetState = 'idle' | 'walk' | 'sleep' | 'wave' | 'boo' | 'look' | 'watch' | 'wake';
-const duration = { wave: 1600, boo: 850, look: 1000, watch: 1300, wake: 1200 };
+type PetState = 'idle' | 'walk' | 'sleep' | 'wave' | 'boo' | 'look' | 'watch' | 'wake' | 'groom' | 'listen';
+const duration = { wave: 1600, boo: 850, look: 1000, watch: 1300, wake: 1200, groom: 2000, listen: 1600 };
 let restingMode: 'walk' | 'idle' = 'walk';
 let timer = 0;
 
@@ -21,7 +21,7 @@ function play(state: PetState) {
   document.body.dataset.state = state;
   document.title = state;
   clearTimeout(timer);
-  if (state === 'wave' || state === 'boo' || state === 'look' || state === 'watch' || state === 'wake') {
+  if (state !== 'walk' && state !== 'idle' && state !== 'sleep') {
     timer = window.setTimeout(() => play(restingMode), duration[state]);
   }
 }
@@ -40,7 +40,12 @@ function takeLittleNap() {
   timer = window.setTimeout(() => chooseAction('walk'), 5000 + Math.random() * 4000);
 }
 function lookAround(watchCursor: boolean) {
-  if (document.title === 'walk') play(watchCursor ? 'watch' : 'look');
+  if (document.title !== 'walk') return;
+  if (!watchCursor && document.body.dataset.pet === 'bunny') {
+    play(Math.random() < 0.5 ? 'listen' : 'groom');
+    return;
+  }
+  play(watchCursor ? 'watch' : 'look');
 }
 function aimEyes(x: number, y: number) {
   if (document.title !== 'watch') return;

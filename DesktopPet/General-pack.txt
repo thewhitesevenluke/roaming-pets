@@ -1,5 +1,5 @@
 GENERAL PACK · BUNNY FOR MAC
 
-Unzip and double-click Bunny.app. Bunny hops around and remembers where you drop it. Click to wave or wake it and right-click to choose an action. Try Binky for a twisting jump, Rest to pause, or Sleep for a nap until clicked. Bunny also takes short naps on its own.
+Unzip and double-click Bunny.app. Bunny roams around and remembers where you drop it. Click to wave or wake it and right-click to choose an action. Choose Groom for a nose rub or Listen for a curious head tilt. Try Binky for a twisting jump, Rest to pause, or Sleep for a nap until clicked. Bunny also takes short naps on its own.
 
 Requires macOS 11 or newer. This locally signed app has not been notarized by Apple.

@@ -97,7 +97,7 @@ function run(args) {
     const actions = {
       Ghosty: [['Boo!', 'boo'], ['Glide around', 'walk'], ['Hover in place', 'idle']],
       Bat: [['Fly around', 'walk']],
-      Bunny: [['Binky', 'boo'], ['Hop around', 'walk'], ['Rest', 'idle']],
+      Bunny: [['Binky', 'boo'], ['Groom', 'groom'], ['Listen', 'listen'], ['Roam around', 'walk'], ['Rest', 'idle']],
       Skeleton: [['Rattle', 'boo'], ['Walk around', 'walk'], ['Rest', 'idle']]
     }[name];
     addAction(menu, 'Wave', 'wave');

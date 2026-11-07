@@ -1,26 +1,19 @@
 <g class="character bunny" stroke="#584643" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
   <g class="rabbit-body">
-    <!-- Only the toe tips peek out from under the round belly. -->
-    <path fill="#fff5dc" d="M333 292q8-22 25-17q15-1 18 12q13 9 4 23q-10 16-27 10l-16-9Z"/>
-    <g transform="translate(167 358)"><g class="rabbit-front rabbit-paw">
-      <ellipse cx="-3" cy="0" rx="23" ry="15" fill="#f8e8ce"/>
-    </g></g>
-    <g transform="translate(296 361)"><g class="rabbit-back">
-      <ellipse cx="-6" cy="0" rx="29" ry="16" fill="#efd7b6"/>
-    </g></g>
-    <path fill="#ecd6b5" d="M132 293C132 255 155 229 194 221C226 214 243 210 266 213C317 215 349 246 352 291C355 329 330 350 294 357C257 364 212 364 175 353C148 345 130 326 132 293Z"/>
-    <path fill="#f8e8ce" stroke="none" d="M140 286q30 10 55 0q-5 30 18 52q-24 12-49-4q-23-14-24-48Z"/>
-    <path fill="none" stroke="#bc9b7c" stroke-width="4" d="M283 306q9-22 30-20q18 1 22 16"/>
+    <circle cx="312" cy="302" r="21" fill="#fff2db"/>
+    <g class="rabbit-back"><ellipse cx="269" cy="349" rx="22" ry="13" fill="#eed8b9"/></g>
+    <g class="rabbit-front rabbit-paw"><ellipse cx="175" cy="347" rx="18" ry="13" fill="#faead2"/></g>
+    <path fill="#f0dabe" d="M146 288C146 248 175 223 218 222C260 220 299 233 310 269C323 305 304 335 275 342C248 350 198 349 171 337C153 329 146 312 146 288Z"/>
     <g class="rabbit-head">
-      <g class="rabbit-ear rear-ear">
-        <path fill="#d7ac87" d="M220 191q-2-49 19-96q22-49 40-37q20 14-1 71q-16 42-41 70Z"/>
-        <path fill="#d79691" stroke="none" d="M235 176q2-35 20-72q12-25 18-22q7 7-7 42q-15 35-31 52Z"/>
-      </g>
-      <g class="rabbit-ear near-ear">
-        <path fill="#f6e7cc" d="M169 196q-30-47-33-103q-3-48 16-53q22-5 37 48q13 49 2 105Z"/>
-        <path fill="#e8b2a6" stroke="none" d="M174 173q-17-37-20-79q-2-28 4-29q8-1 16 29q11 46 0 79Z"/>
-      </g>
-      <path fill="#f6e7cc" d="M132 222q-1-50 46-59q70-16 89 36q6 14 5 28q17 17 2 37q-15 21-47 19q-29 13-57 1q-34 2-47-20q-12-19 9-42Z"/>
+      <defs>
+        <g id="bunnyEar">
+          <path fill="#f6e7cc" d="M169 196q-30-47-33-103q-3-48 16-53q22-5 37 48q13 49 2 105Z"/>
+          <path fill="#e8b2a6" stroke="none" d="M174 173q-17-37-20-79q-2-28 4-29q8-1 16 29q11 46 0 79Z"/>
+        </g>
+      </defs>
+      <g class="rabbit-ear rear-ear"><use href="#bunnyEar" transform="translate(413 0) scale(-1 1)"/></g>
+      <g class="rabbit-ear near-ear"><use href="#bunnyEar"/></g>
+      <path fill="#f6e7cc" d="M136 220C136 185 161 161 199 160C237 158 265 180 267 214C270 246 254 267 224 277C211 282 194 283 179 277C150 266 135 247 136 220Z"/>
       <g class="lids animal-lids" fill="#362e30" stroke="none">
         <ellipse cx="166" cy="233" rx="9" ry="13"/><ellipse cx="239" cy="231" rx="9" ry="13"/>
       </g>
@@ -29,5 +22,6 @@
       <path fill="none" stroke-width="3" d="M202 255v3q-4 6-10 4m10-4q4 6 10 3"/>
       <path fill="none" stroke="#bba28e" stroke-width="3" d="M153 253l-30-3m32 11-27 5m123-12 30-5m-31 13 26 3"/>
     </g>
+    <g class="wash-paw"><path fill="#faead2" d="M159 311q-6-20 9-37l13-13q2-12 13-12q13 0 13 11q0 8-12 15l-13 29q-6 15-16 13"/></g>
   </g>
 </g>
