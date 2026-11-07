@@ -46,6 +46,7 @@ function aimEyes(x: number, y: number) {
   if (document.title !== 'watch') return;
   // Close cursors get a small glance. Distant ones get the full eye movement.
   const distance = Math.max(42, Math.hypot(x, y));
+  if (document.body.dataset.pet === 'bunny') pet.style.setProperty('--ear-angle', String(12 * x / distance));
   const isBat = document.body.dataset.pet === 'bat';
   pet.style.setProperty('--gaze-x', ((isBat ? 4 : 22) * x / distance) + 'px');
   pet.style.setProperty('--gaze-y', ((isBat ? 3 : 14) * y / distance) + 'px');

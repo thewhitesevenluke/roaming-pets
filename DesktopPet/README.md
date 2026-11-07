@@ -4,7 +4,7 @@ Ghosty floats above your other windows. The artwork comes from the supplied refe
 
 ## Open Ghosty
 
-Double-click **Ghosty.app**, **Bat.app**, or **Skeleton.app** in Finder. Each launches its own pet, with a separate sleeping pose and saved spot. Ghosty starts gliding right away and occasionally curves onto a new course as it roams. Every 90–180 seconds of roaming, Ghosty naps for 5–9 seconds, slowly opens its eyes, and glides on. You can click to wake it early. It sometimes slows for a few seconds, then picks up its usual pace. Occasionally it pauses for a second to glance around. Sometimes its eyes follow your cursor during the pause, then it blinks and moves on. It turns back at the top and bottom. You can open its menu while it moves. Choose **Hover in place** to pause or **Glide around** to resume. At either side of the screen, the pet turns and keeps roaming. Right-click and choose **Quit Ghosty** to close it.
+Double-click **Ghosty.app**, **Bat.app**, **Skeleton.app**, or **Bunny.app** in Finder. Each launches its own pet, with a separate sleeping pose and saved spot. Ghosty starts gliding right away and occasionally curves onto a new course as it roams. Every 90–180 seconds of roaming, Ghosty naps for 5–9 seconds, slowly opens its eyes, and glides on. You can click to wake it early. It sometimes slows for a few seconds, then picks up its usual pace. Occasionally it pauses for a second to glance around. Sometimes its eyes follow your cursor during the pause, then it blinks and moves on. It turns back at the top and bottom. You can open its menu while it moves. Choose **Hover in place** to pause or **Glide around** to resume. At either side of the screen, the pet turns and keeps roaming. Right-click and choose **Quit Ghosty** to close it.
 
 ## Run or edit the source
 
@@ -26,5 +26,5 @@ Open `pet.ts` and change the wave duration from `1600` to `2000` for a two-secon
 
 The timers and interactions live in `pet.ts`. The drawing and animations live in `pet.html`. A small native Mac window in `window.js` hosts them. Node starts the app directly, with no packages to install.
 
-After editing the source, run `npm run package` to rebuild the three apps beside the project folder.
+After editing the source, run `npm run package` to rebuild the pet apps beside the project folder.
 

@@ -8,6 +8,6 @@
 
 Each pet has its own Mac app and remembers its own spot.
 
-## General pack · planned for later
+## General pack · in development
 
-Bunnies are the first pet idea. A bunny could hop between resting spots, twitch its ears when it notices the cursor, and tuck its paws under itself for a nap.
+- **Bunny** hops around on soft paws, twitches its nose, and tilts an ear toward the cursor. It tucks in its feet and lays its ears back for a nap. Open **Bunny.app** to launch it.

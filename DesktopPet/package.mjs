@@ -14,7 +14,7 @@ execFileSync('/Library/Developer/CommandLineTools/usr/bin/clang', [
   '-framework', 'Cocoa', fileURLToPath(new URL('launcher.m', import.meta.url)),
   '-o', launcher
 ]);
-for (const name of ['Ghosty', 'Bat', 'Skeleton']) {
+for (const name of ['Ghosty', 'Bat', 'Skeleton', 'Bunny']) {
   const app = join(buildFolder, name + '.app');
   const destination = fileURLToPath(new URL('../' + name + '.app', import.meta.url));
   const contents = join(app, 'Contents');
@@ -31,8 +31,8 @@ for (const name of ['Ghosty', 'Bat', 'Skeleton']) {
   <key>CFBundleExecutable</key><string>${name}</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>LSMinimumSystemVersion</key><string>11.0</string>
-  <key>CFBundleVersion</key><string>3</string>
-  <key>CFBundleShortVersionString</key><string>1.2.0</string>
+  <key>CFBundleVersion</key><string>4</string>
+  <key>CFBundleShortVersionString</key><string>1.3.0</string>
   <key>LSUIElement</key><true/>
   </dict></plist>
   `);

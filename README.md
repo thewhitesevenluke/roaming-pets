@@ -1,10 +1,12 @@
 # Roaming Pets
 
-Three little Halloween pets for your Mac. Ghosty waves and watches your cursor, Bat flies and hangs upside down to sleep, and Tiny Skeleton folds into a pile of bones to nap.
+Little roaming desktop pets for your Mac. Ghosty waves and watches your cursor, Bat flies and hangs upside down to sleep, and Tiny Skeleton folds into a pile of bones to nap.
+
+The General pack starts with Bunny, a cream-colored rabbit that hops, sniffs, and does a little twisting jump called a binky.
 
 ## Get the pets
 
-[Download the latest release](https://github.com/thewhitesevenluke/roaming-pets/releases/latest). Choose the Halloween Pack ZIP for all three pets, or download an individual ZIP. Unzip it in Finder and double-click the app. Open multiple pets to have them roam together.
+[Download the latest release](https://github.com/thewhitesevenluke/roaming-pets/releases/latest). Choose the General Pack ZIP for Bunny, the Halloween Pack ZIP for Ghosty, Bat, and Tiny Skeleton, or an individual pet ZIP. Unzip it in Finder and double-click the app. Open multiple pets to have them roam together.
 
 Requires macOS 11 or newer. These apps are locally signed and have not been notarized by Apple. macOS may block a downloaded app. [Apple’s guide to opening downloaded apps](https://support.apple.com/en-us/102445)
 
@@ -21,4 +23,4 @@ cd DesktopPet
 npm run package
 ```
 
-This builds Ghosty.app, Bat.app, and Skeleton.app in the parent folder.
+This builds Bunny.app, Ghosty.app, Bat.app, and Skeleton.app in the parent folder.

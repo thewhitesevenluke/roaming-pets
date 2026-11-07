@@ -39,7 +39,7 @@ function run(args) {
     (_, index) => displays.objectAtIndex(index).visibleFrame);
   const start = startingPoint(saved, screens, area, width, height);
   if (!saved && name !== 'Ghosty') {
-    const offset = name === 'Bat' ? 1 : 2;
+    const offset = { Bat: 1, Skeleton: 2, Bunny: 3 }[name] || 1;
     start.x = Math.max(area.origin.x, start.x - offset * width);
     start.y = Math.min(area.origin.y + area.size.height - height, start.y + offset * 45);
   }
@@ -97,6 +97,7 @@ function run(args) {
     const actions = {
       Ghosty: [['Boo!', 'boo'], ['Glide around', 'walk'], ['Hover in place', 'idle']],
       Bat: [['Fly around', 'walk']],
+      Bunny: [['Binky', 'boo'], ['Hop around', 'walk'], ['Rest', 'idle']],
       Skeleton: [['Rattle', 'boo'], ['Walk around', 'walk'], ['Rest', 'idle']]
     }[name];
     addAction(menu, 'Wave', 'wave');
@@ -147,7 +148,7 @@ function run(args) {
       const origin = window.frame.origin;
       const x = mouse.x - (origin.x + width / 2);
       // Cocoa's y-axis points upward. The drawing's y-axis points downward.
-      const y = origin.y + height * (name === 'Bat' ? 0.55 : 0.70) - mouse.y;
+      const y = origin.y + height * (['Bat', 'Bunny'].includes(name) ? 0.55 : 0.70) - mouse.y;
       view.evaluateJavaScriptCompletionHandler('aimEyes(' + x + ',' + y + ')', () => {});
     }
     if (!anchor && state === 'walk') {
