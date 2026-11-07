@@ -31,7 +31,15 @@ function run(args) {
   app.finishLaunching;
   const area = $.NSScreen.mainScreen.visibleFrame;
   const width = 176, height = 156;
-  const name = args[1] || 'Ghosty';
+  const petActions = {
+      Ghosty: [['Boo!', 'boo'], ['Glide around', 'walk'], ['Hover in place', 'idle']],
+      Bat: [['Fly around', 'walk']],
+      Turtle: [['Stretch neck', 'stretch'], ['Amble around', 'walk'], ['Rest', 'idle']],
+      Bunny: [['Binky', 'boo'], ['Groom', 'groom'], ['Listen', 'listen'], ['Roam around', 'walk'], ['Rest', 'idle']],
+      Hedgehog: [['Roll', 'roll'], ['Scurry around', 'walk'], ['Rest', 'idle']],
+      Skeleton: [['Rattle', 'boo'], ['Walk around', 'walk'], ['Rest', 'idle']]
+  };
+  let name = args[1] || 'Ghosty';
   const preferences = $.NSUserDefaults.alloc.initWithSuiteName('local.' + name.toLowerCase() + '.desktop-pet');
   const saved = ObjC.deepUnwrap(preferences.dictionaryForKey('lastDrop'));
   const displays = $.NSScreen.screens;
@@ -39,7 +47,7 @@ function run(args) {
     (_, index) => displays.objectAtIndex(index).visibleFrame);
   const start = startingPoint(saved, screens, area, width, height);
   if (!saved && name !== 'Ghosty') {
-    const offset = { Bat: 1, Skeleton: 2, Bunny: 3, Turtle: 4 }[name] || 1;
+    const offset = { Bat: 1, Skeleton: 2, Bunny: 3, Turtle: 4, Hedgehog: 5 }[name] || 1;
     start.x = Math.max(area.origin.x, start.x - offset * width);
     start.y = Math.min(area.origin.y + area.size.height - height, start.y + offset * 45);
   }
@@ -76,7 +84,26 @@ function run(args) {
         implementation(item) {
           const action = ObjC.unwrap(item.representedObject);
           if (action === 'quit') shouldQuit = true;
-          else view.evaluateJavaScriptCompletionHandler('chooseAction(' + JSON.stringify(action) + ')', () => {});
+          else if (Object.prototype.hasOwnProperty.call(petActions, action)) {
+            if (action === name) return;
+            name = action;
+            facing = 0;
+            turnIntentSeconds = 0;
+            lastFacingChange = -Infinity;
+            glideX = glideY = null;
+            view.evaluateJavaScriptCompletionHandler('switchPet(' + JSON.stringify(name.toLowerCase()) + ')', () => {});
+          } else {
+            if (action === 'roll') {
+              const area = window.screen.visibleFrame;
+              const origin = window.frame.origin.x;
+              rollDirection = facing || -1;
+              if (origin < area.origin.x + 72) rollDirection = 1;
+              if (origin + width > area.origin.x + area.size.width - 72) rollDirection = -1;
+              facing = rollDirection;
+              view.evaluateJavaScriptCompletionHandler('faceTravel(' + facing + ')', () => {});
+            }
+            view.evaluateJavaScriptCompletionHandler('chooseAction(' + JSON.stringify(action) + ')', () => {});
+          }
         }
       }
     }
@@ -94,18 +121,21 @@ function run(args) {
     const menu = $.NSMenu.alloc.initWithTitle(name);
     menu.autoenablesItems = false;
     const asleep = ObjC.unwrap(view.title) === 'sleep';
-    const actions = {
-      Ghosty: [['Boo!', 'boo'], ['Glide around', 'walk'], ['Hover in place', 'idle']],
-      Bat: [['Fly around', 'walk']],
-      Turtle: [['Stretch neck', 'stretch'], ['Amble around', 'walk'], ['Rest', 'idle']],
-      Bunny: [['Binky', 'boo'], ['Groom', 'groom'], ['Listen', 'listen'], ['Roam around', 'walk'], ['Rest', 'idle']],
-      Skeleton: [['Rattle', 'boo'], ['Walk around', 'walk'], ['Rest', 'idle']]
-    }[name];
+    const actions = petActions[name];
     addAction(menu, 'Wave', 'wave');
     for (const [label, action] of actions) addAction(menu, label, action);
     menu.addItem($.NSMenuItem.separatorItem);
     addAction(menu, asleep ? 'Wake up' : 'Sleep', asleep ? 'walk' : 'sleep');
     menu.addItem($.NSMenuItem.separatorItem);
+    const choices = $.NSMenu.alloc.initWithTitle('Choose pet');
+    choices.autoenablesItems = false;
+    for (const kind of Object.keys(petActions)) {
+      const item = addAction(choices, kind, kind);
+      item.state = kind === name ? 1 : 0;
+    }
+    const picker = $.NSMenuItem.alloc.initWithTitleActionKeyEquivalent('Choose pet', null, '');
+    picker.submenu = choices;
+    menu.addItem(picker);
     addAction(menu, 'Quit ' + name, 'quit');
 
     const frame = window.frame;
@@ -133,14 +163,13 @@ function run(args) {
   let heading = Math.atan2(11, startsOnLeft ? -17 : 17);
   let secondsUntilTurn = 6 + Math.random() * 6;
   let remainingTurn = 0;
-  const usualSpeed = name === 'Turtle' ? 11 : 20;
+  let rollDirection = -1;
   const slowStretchSeconds = 4;
   let secondsUntilSlowdown = 8 + Math.random() * 8;
   let secondsUntilNap = 90 + Math.random() * 90;
   const nextLookDelay = () => 30 + Math.random() * 25;
   let secondsUntilLook = nextLookDelay();
   let glideX = null;
-  const turnsToTravel = name === 'Bunny' || name === 'Turtle';
   let facing = 0;
   let turnIntentSeconds = 0;
   let lastFacingChange = -Infinity;
@@ -201,6 +230,7 @@ function run(args) {
       heading += turn;
       remainingTurn -= turn;
       secondsUntilSlowdown -= seconds;
+      const usualSpeed = name === 'Turtle' ? 11 : 20;
       let speed = usualSpeed;
       if (secondsUntilSlowdown <= 0) {
         // One smooth dip in speed over four seconds of actual roaming.
@@ -209,7 +239,7 @@ function run(args) {
         if (progress === 1) secondsUntilSlowdown = 8 + Math.random() * 8;
       }
       const horizontalHeading = Math.cos(heading);
-      if (turnsToTravel) faceTravel(horizontalHeading, seconds, now);
+      if (['Bunny', 'Turtle', 'Hedgehog'].includes(name)) faceTravel(horizontalHeading, seconds, now);
       const dx = horizontalHeading * speed * seconds;
       const dy = Math.sin(heading) * speed * seconds;
       const next = (glideX ?? origin.x) + dx;
@@ -228,6 +258,12 @@ function run(args) {
         heading = Math.PI - heading;
         remainingTurn = 0;
       }
+    } else if (!anchor && name === 'Hedgehog' && state === 'roll') {
+      const bounds = window.screen.visibleFrame;
+      const origin = window.frame.origin;
+      const next = (glideX ?? origin.x) + rollDirection * 46 * Math.min(now - lastTick, 100) / 1000;
+      glideX = Math.max(bounds.origin.x, Math.min(bounds.origin.x + bounds.size.width - width, next));
+      window.setFrameOrigin($.NSMakePoint(Math.round(glideX), origin.y));
     } else {
       glideX = null;
       glideY = null;

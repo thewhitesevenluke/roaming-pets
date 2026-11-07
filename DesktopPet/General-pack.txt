@@ -1,9 +1,11 @@
-GENERAL PACK · BUNNY AND TURTLE FOR MAC
+GENERAL PACK · BUNNY, TURTLE AND HEDGEHOG FOR MAC
 
-Unzip and double-click Bunny.app or Turtle.app. You can run both together. Bunny roams around and remembers where you drop it. Click to wave or wake it and right-click to choose an action. Choose Groom for a nose rub or Listen for a curious head tilt. Try Binky for a twisting jump, Rest to pause, or Sleep for a nap until clicked. Bunny also takes short naps on its own.
+Unzip and double-click Bunny.app, Turtle.app, or Hedgehog.app. You can run all three together. Bunny roams around and remembers where you drop it. Click to wave or wake it and right-click to choose an action. Choose Groom for a nose rub or Listen for a curious head tilt. Try Binky for a twisting jump, Rest to pause, or Sleep for a nap until clicked. Bunny also takes short naps on its own.
 
 Turtle ambles slowly and stretches its neck. Choose Sleep to have it tuck its head and feet into its shell. Click the sleeping shell to wake Turtle.
 
 Bunny and Turtle turn to face their direction of travel after a sustained change of course.
+
+Hedgehog curls into a ball to sleep. Choose Roll for a short spin across the desktop. Right-click any pet and open Choose pet to switch in the same window. The action menu follows the selected pet.
 
 Requires macOS 11 or newer. This locally signed app has not been notarized by Apple.

@@ -1,5 +1,5 @@
-type PetState = 'idle' | 'walk' | 'sleep' | 'wave' | 'boo' | 'look' | 'watch' | 'wake' | 'groom' | 'listen' | 'stretch';
-const duration = { wave: 1600, boo: 850, look: 900, watch: 1000, wake: 1200, groom: 2000, listen: 1600, stretch: 1500 };
+type PetState = 'idle' | 'walk' | 'sleep' | 'wave' | 'boo' | 'look' | 'watch' | 'wake' | 'groom' | 'listen' | 'stretch' | 'roll';
+const duration = { wave: 1600, boo: 850, look: 900, watch: 1000, wake: 1200, groom: 2000, listen: 1600, stretch: 1500, roll: 1500 };
 let restingMode: 'walk' | 'idle' = 'walk';
 let timer = 0;
 
@@ -32,6 +32,14 @@ function chooseAction(action: PetState) {
   if (action === 'walk' || action === 'idle') restingMode = action;
   const waking = action === 'walk' && document.body.dataset.state === 'sleep';
   play(waking ? 'wake' : action);
+}
+function switchPet(kind: string) {
+  pet.querySelector('.travel-facing')!.getAnimations().forEach(animation => animation.cancel());
+  delete document.body.dataset.facing;
+  document.body.dataset.pet = kind;
+  down = null;
+  restingMode = 'walk';
+  play('walk');
 }
 function faceTravel(direction: number) {
   const body = document.body;

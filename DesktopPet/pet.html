@@ -144,6 +144,23 @@
 }
 [data-pet=turtle][data-state=walk] .turtle-tail{transform-origin:330px 285px;animation:tailSway 2.2s ease-in-out infinite alternate}
 @keyframes tailSway{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+
+[data-pet=hedgehog] .ghosty{display:none}
+[data-pet=hedgehog] .hedgehog{display:inline}
+[data-pet=hedgehog] svg{animation:none}
+[data-pet=hedgehog][data-state=sleep] svg{animation:settle .55s ease-out both}
+.hedgehog .animal-lids{transform-origin:124px 269px}
+.hedge-awake,.hedge-ball{transform-origin:225px 259px;transition:opacity .5s ease,transform .65s ease}
+.hedge-ball{opacity:0;transform:scale(.75)}
+:is([data-state=sleep],[data-state=roll]) .hedge-awake{opacity:0;transform:scale(.65)}
+:is([data-state=sleep],[data-state=roll]) .hedge-ball{opacity:1;transform:scale(1)}
+[data-state=roll] .hedge-ball{animation:hedgeRoll 1.5s ease-in-out both}
+[data-state=walk] .hedge-foot{transform-box:fill-box;transform-origin:center top;animation:hedgeStep .35s ease-in-out infinite alternate}
+[data-state=walk] .hedge-foot.opposite{animation-direction:alternate-reverse}
+:is([data-state=watch],[data-state=look],[data-state=idle]) .hedge-nose{animation:sniff .35s alternate ease-in-out infinite}
+[data-state=wave] .hedge-foot:first-child{transform-box:fill-box;transform-origin:center top;animation:turtleWave .38s alternate ease-in-out infinite}
+@keyframes hedgeStep{from{transform:rotate(-9deg)}to{transform:rotate(11deg) translateY(-3px)}}
+@keyframes hedgeRoll{0%{transform:scale(.75);opacity:0}15%{transform:scale(1);opacity:1}85%{transform:scale(1) rotate(-360deg);opacity:1}100%{transform:scale(.85) rotate(-360deg);opacity:0}}
 </style>
 <body data-pet="ghosty">
 <button id="pet" aria-label="Ghosty. Click to wave, drag to move, or right-click for actions." title="Ghosty · Click to wave · Drag to move · Right-click for actions">
@@ -193,6 +210,7 @@ BAT_ART
 SKELETON_ART
 BUNNY_ART
 TURTLE_ART
+HEDGEHOG_ART
 </svg></span></button>
 <script>/* PET_SCRIPT */</script>
 </body>
