@@ -1,5 +1,5 @@
-type PetState = 'idle' | 'walk' | 'sleep' | 'wave' | 'boo' | 'look' | 'watch' | 'wake' | 'groom' | 'listen';
-const duration = { wave: 1600, boo: 850, look: 1000, watch: 1300, wake: 1200, groom: 2000, listen: 1600 };
+type PetState = 'idle' | 'walk' | 'sleep' | 'wave' | 'boo' | 'look' | 'watch' | 'wake' | 'groom' | 'listen' | 'stretch';
+const duration = { wave: 1600, boo: 850, look: 900, watch: 1000, wake: 1200, groom: 2000, listen: 1600, stretch: 1500 };
 let restingMode: 'walk' | 'idle' = 'walk';
 let timer = 0;
 
@@ -33,6 +33,25 @@ function chooseAction(action: PetState) {
   const waking = action === 'walk' && document.body.dataset.state === 'sleep';
   play(waking ? 'wake' : action);
 }
+function faceTravel(direction: number) {
+  const body = document.body;
+  const side = direction > 0 ? 'right' : 'left';
+  if (body.dataset.facing === side) return;
+  const previous = body.dataset.facing;
+  body.dataset.facing = side;
+  if (!previous) return;
+
+  const sign = direction > 0 ? -1 : 1;
+  const drawing = pet.querySelector<HTMLElement>('.travel-facing')!;
+  // Ease into the turn, switch sides, then settle at full width.
+  drawing.animate([
+    { transform: 'scaleX(' + -sign + ')' },
+    { transform: 'scaleX(' + -sign * 0.78 + ')', offset: 0.5 },
+    { transform: 'scaleX(' + sign * 0.78 + ')', offset: 0.5 },
+    { transform: 'scaleX(' + sign + ')' }
+  ], { duration: 380, easing: 'ease-in-out' });
+}
+
 function takeLittleNap() {
   if (document.title !== 'walk') return;
   play('sleep');
@@ -45,16 +64,22 @@ function lookAround(watchCursor: boolean) {
     play(Math.random() < 0.5 ? 'listen' : 'groom');
     return;
   }
+  const direction = Math.random() < 0.5 ? -1 : 1;
+  pet.style.setProperty('--glance-x', (direction * (document.body.dataset.pet === 'bat' ? 1.5 : 5)) + 'px');
+  pet.style.setProperty('--gaze-x', '0px');
+  pet.style.setProperty('--gaze-y', '0px');
+  pet.style.setProperty('--ear-angle', '0');
   play(watchCursor ? 'watch' : 'look');
 }
 function aimEyes(x: number, y: number) {
   if (document.title !== 'watch') return;
   // Close cursors get a small glance. Distant ones get the full eye movement.
-  const distance = Math.max(42, Math.hypot(x, y));
-  if (document.body.dataset.pet === 'bunny') pet.style.setProperty('--ear-angle', String(12 * x / distance));
+  const distance = Math.max(100, Math.hypot(x, y));
+  if (document.body.dataset.pet === 'turtle') pet.style.setProperty('--neck-lift', (5 * y / distance) + 'px');
+  if (document.body.dataset.pet === 'bunny') pet.style.setProperty('--ear-angle', String(5 * x / distance * (document.body.dataset.facing === 'right' ? -1 : 1)));
   const isBat = document.body.dataset.pet === 'bat';
-  pet.style.setProperty('--gaze-x', ((isBat ? 4 : 22) * x / distance) + 'px');
-  pet.style.setProperty('--gaze-y', ((isBat ? 3 : 14) * y / distance) + 'px');
+  pet.style.setProperty('--gaze-x', ((isBat ? 2 : 7) * x / distance) + 'px');
+  pet.style.setProperty('--gaze-y', ((isBat ? 1.5 : 4) * y / distance) + 'px');
 }
 function greetOrWake() {
   if (document.body.dataset.state === 'sleep') {

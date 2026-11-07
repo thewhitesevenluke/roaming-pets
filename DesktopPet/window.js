@@ -39,7 +39,7 @@ function run(args) {
     (_, index) => displays.objectAtIndex(index).visibleFrame);
   const start = startingPoint(saved, screens, area, width, height);
   if (!saved && name !== 'Ghosty') {
-    const offset = { Bat: 1, Skeleton: 2, Bunny: 3 }[name] || 1;
+    const offset = { Bat: 1, Skeleton: 2, Bunny: 3, Turtle: 4 }[name] || 1;
     start.x = Math.max(area.origin.x, start.x - offset * width);
     start.y = Math.min(area.origin.y + area.size.height - height, start.y + offset * 45);
   }
@@ -97,6 +97,7 @@ function run(args) {
     const actions = {
       Ghosty: [['Boo!', 'boo'], ['Glide around', 'walk'], ['Hover in place', 'idle']],
       Bat: [['Fly around', 'walk']],
+      Turtle: [['Stretch neck', 'stretch'], ['Amble around', 'walk'], ['Rest', 'idle']],
       Bunny: [['Binky', 'boo'], ['Groom', 'groom'], ['Listen', 'listen'], ['Roam around', 'walk'], ['Rest', 'idle']],
       Skeleton: [['Rattle', 'boo'], ['Walk around', 'walk'], ['Rest', 'idle']]
     }[name];
@@ -132,12 +133,31 @@ function run(args) {
   let heading = Math.atan2(11, startsOnLeft ? -17 : 17);
   let secondsUntilTurn = 6 + Math.random() * 6;
   let remainingTurn = 0;
-  const usualSpeed = 20;
+  const usualSpeed = name === 'Turtle' ? 11 : 20;
   const slowStretchSeconds = 4;
   let secondsUntilSlowdown = 8 + Math.random() * 8;
   let secondsUntilNap = 90 + Math.random() * 90;
-  let secondsUntilLook = 15 + Math.random() * 15;
+  const nextLookDelay = () => 30 + Math.random() * 25;
+  let secondsUntilLook = nextLookDelay();
   let glideX = null;
+  const turnsToTravel = name === 'Bunny' || name === 'Turtle';
+  let facing = 0;
+  let turnIntentSeconds = 0;
+  let lastFacingChange = -Infinity;
+  function faceTravel(horizontalHeading, seconds, now) {
+    const desired = Math.sign(horizontalHeading);
+    // Ignore near-vertical movement and brief reversals.
+    if (Math.abs(horizontalHeading) < 0.35 || desired === facing) {
+      turnIntentSeconds = 0;
+      return;
+    }
+    turnIntentSeconds += seconds;
+    if (facing && (turnIntentSeconds < 0.7 || now - lastFacingChange < 2600)) return;
+    facing = desired;
+    turnIntentSeconds = 0;
+    lastFacingChange = now;
+    view.evaluateJavaScriptCompletionHandler('faceTravel(' + facing + ')', () => {});
+  }
   let lastTick = Date.now();
   let glideY = null;
   function advanceGlide() {
@@ -166,7 +186,7 @@ function run(args) {
       }
       secondsUntilLook -= seconds;
       if (secondsUntilLook <= 0) {
-        secondsUntilLook = 15 + Math.random() * 15;
+        secondsUntilLook = nextLookDelay();
         view.evaluateJavaScriptCompletionHandler('lookAround(' + (Math.random() < 0.5) + ')', () => {});
         lastTick = now;
         return;
@@ -185,10 +205,12 @@ function run(args) {
       if (secondsUntilSlowdown <= 0) {
         // One smooth dip in speed over four seconds of actual roaming.
         const progress = Math.min(-secondsUntilSlowdown / slowStretchSeconds, 1);
-        speed -= 11 * Math.sin(Math.PI * progress) ** 2;
+        speed -= usualSpeed * 0.55 * Math.sin(Math.PI * progress) ** 2;
         if (progress === 1) secondsUntilSlowdown = 8 + Math.random() * 8;
       }
-      const dx = Math.cos(heading) * speed * seconds;
+      const horizontalHeading = Math.cos(heading);
+      if (turnsToTravel) faceTravel(horizontalHeading, seconds, now);
+      const dx = horizontalHeading * speed * seconds;
       const dy = Math.sin(heading) * speed * seconds;
       const next = (glideX ?? origin.x) + dx;
       const bottom = bounds.origin.y, top = bottom + bounds.size.height - height;
@@ -209,6 +231,7 @@ function run(args) {
     } else {
       glideX = null;
       glideY = null;
+      turnIntentSeconds = 0;
     }
     lastTick = now;
   }

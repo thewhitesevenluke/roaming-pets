@@ -7,13 +7,13 @@
 .asleep,.looking{display:none}
 [data-state=watch] svg,[data-state=look] svg{animation:none}
 [data-state=wake] .looking,[data-state=walk] .looking,[data-state=watch] .looking,[data-state=look] .looking{display:inline}
-[data-state=look] .eyes{animation:glance 1s ease-in-out both}
-[data-state=watch] .eyes{transform:translate(var(--gaze-x,0px),var(--gaze-y,0px));transition:transform 90ms linear}
+[data-state=look] .eyes,[data-state=look] .bat-pupils{animation:glance .9s ease-in-out both}
+[data-state=watch] .eyes{transform:translate(var(--gaze-x,0px),var(--gaze-y,0px));transition:transform .22s ease-out}
 .lids{transform-origin:215px 137px}
 /* Eyelids move independently of the roaming window. */
 [data-state=walk] .lids{animation:blink 5.6s linear infinite}
 @keyframes blink{0%,81%,85%,100%{transform:scaleY(1)}82.6%,83.2%{transform:scaleY(.08)}}
-@keyframes glance{0%,100%{transform:translateX(0)}20%,40%{transform:translateX(-13px)}62%,82%{transform:translateX(13px)}}
+@keyframes glance{0%,100%{transform:none}35%,65%{transform:translateX(var(--glance-x,4px))}}
 [data-state=wave] #ghost{filter:url(#wave)}
 [data-state=walk] svg{animation:glide 1.4s ease-in-out infinite alternate}
 [data-state=sleep] svg{animation:settle .55s ease-out both}
@@ -36,9 +36,7 @@
 [data-pet=bat] .bat,[data-pet=skeleton] .skeleton{display:inline}
 [data-state=sleep] .character .animal-lids{visibility:hidden}
 [data-state=sleep] .shut{display:inline}
-[data-state=watch] .bat-pupils{transform:translate(var(--gaze-x,0px),var(--gaze-y,0px));transition:transform .12s ease-out}
-[data-state=look] .bat-pupils{animation:batGlance 1s ease-in-out both}
-@keyframes batGlance{0%,100%{transform:none}20%,40%{transform:translateX(-3px)}62%,82%{transform:translateX(3px)}}
+[data-state=watch] .bat-pupils{transform:translate(var(--gaze-x,0px),var(--gaze-y,0px));transition:transform .22s ease-out}
 .bat .animal-lids{transform-origin:230px 235px}
 .wing{transform-origin:201px 278px;animation:flap .55s ease-in-out infinite alternate}
 [data-state=wave] .wing{animation-duration:.25s}
@@ -116,9 +114,35 @@
 }
 @keyframes listenTilt{0%,100%{transform:none}30%,74%{transform:rotate(9deg)}}
 @keyframes listenEar{0%,100%{transform:none}28%,72%{transform:rotate(-15deg)}}
+
+[data-pet=turtle] .ghosty{display:none}
+[data-pet=turtle] .turtle{display:inline}
+[data-pet=turtle]:is([data-state=walk],[data-state=idle],[data-state=stretch],[data-state=wave]) svg{animation:none}
+.turtle-eye{transform-origin:64px 221px}
+.turtle-neck,.turtle-tail,.turtle-legs{transition:transform .95s ease-in-out}
+[data-state=sleep] .turtle-neck{transform:translate(125px,8px)}
+[data-state=sleep] .turtle-legs{transform:translateY(-56px)}
+[data-state=sleep] .turtle-tail{transform:translate(-55px,-14px)}
+[data-state=walk] .turtle-step{animation:turtleStep 1.25s ease-in-out infinite alternate}
+[data-state=walk] .opposite{animation-direction:alternate-reverse}
+[data-state=wave] .waving-foot{animation:turtleWave .48s ease-in-out infinite alternate}
+[data-state=stretch] .turtle-neck{animation:neckStretch 1.5s ease-in-out both}
+[data-state=watch] .turtle-neck{transform:translate(-7px,var(--neck-lift,0px))}
+@keyframes turtleStep{from{transform:rotate(-9deg)}to{transform:rotate(10deg) translateY(-4px)}}
+@keyframes turtleWave{from{transform:rotate(52deg)}to{transform:rotate(77deg)}}
+@keyframes neckStretch{0%,100%{transform:none}36%,70%{transform:translate(-15px,-6px)}}
+
+.travel-facing{display:block;width:100%;height:100%}
+[data-facing=right] .travel-facing{transform:scaleX(-1)}
+[data-pet=bunny][data-state=walk] .rabbit-front{animation:pawReach 1.3s ease-in-out infinite alternate}
+[data-pet=bunny][data-state=walk] .rabbit-back{animation:pawReach 1.3s ease-in-out infinite alternate-reverse}
+@keyframes pawReach{to{transform:translate(-3px,1px) rotate(4deg)}}
+[data-pet=turtle][data-state=walk] .turtle-tail{transform-origin:330px 285px;animation:tailSway 2.2s ease-in-out infinite alternate}
+@keyframes tailSway{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
 </style>
 <body data-pet="ghosty">
 <button id="pet" aria-label="Ghosty. Click to wave, drag to move, or right-click for actions." title="Ghosty · Click to wave · Drag to move · Right-click for actions">
+<span class="travel-facing">
 <svg viewBox="0 0 460 518" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <!-- A solid paper interior prevents tiny color variations in the scan from becoming holes.
@@ -163,6 +187,7 @@
 BAT_ART
 SKELETON_ART
 BUNNY_ART
-</svg></button>
+TURTLE_ART
+</svg></span></button>
 <script>/* PET_SCRIPT */</script>
 </body>

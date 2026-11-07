@@ -1,0 +1,24 @@
+<g class="character turtle" stroke="#38483b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Draw the limbs behind the shell so each one disappears under the rim. -->
+  <defs>
+    <path id="turtleFoot" d="M-13-6q-6 11-4 28q0 10-9 17q-2 7 9 9q21 4 27-6q8-18 6-42Z"/>
+  </defs>
+  <g class="turtle-tail"><path fill="#a8be79" d="M323 285q25 6 53-5q-9 26-47 31Z"/></g>
+  <g class="turtle-legs">
+    <g transform="translate(188 291)"><use class="turtle-step opposite" href="#turtleFoot" fill="#92aa71"/></g>
+    <g transform="translate(306 287)"><use class="turtle-step" href="#turtleFoot" fill="#92aa71"/></g>
+    <g transform="translate(163 299)"><use class="turtle-step waving-foot" href="#turtleFoot" fill="#baca87"/></g>
+    <g transform="translate(275 300)"><use class="turtle-step opposite" href="#turtleFoot" fill="#baca87"/></g>
+  </g>
+  <g class="turtle-neck">
+    <path fill="#b5ca85" d="M178 255q-34 3-48-12q-9-12-12-28q-6-24-34-27q-28-4-45 14q-16 16-11 38q6 25 36 30q23 4 35-2q23 34 75 36Z"/>
+    <g class="lids turtle-eye"><ellipse cx="64" cy="221" rx="7" ry="10" fill="#29372c" stroke="none"/></g>
+    <path fill="none" stroke-width="3" d="M32 237q8 6 17 4"/>
+  </g>
+  <path fill="#739a72" d="M128 284C134 231 148 196 180 176C209 157 249 157 281 172C316 188 336 225 348 277L335 298Q246 325 144 305Z"/>
+  <path fill="#91af7e" d="M167 209l32-24 31 8 4 33-34 18-29-10Z"/>
+  <path fill="#80a785" d="M232 193l35-15 30 20 9 33-32 12-38-17Z"/>
+  <path fill="#577f68" d="M203 248l32-16 37 15-5 38-42 10-28-19Z"/>
+  <path fill="#e6c891" d="M129 273q97 24 216-7q10-3 13 7q3 10-9 16q-110 37-219 5q-10-4-9-12q1-8 8-9Z"/>
+  <path fill="none" stroke="#ad945e" stroke-width="3" d="M153 283l-2 11m65-2v11m70-15 3 10m38-20 4 8"/>
+</g>
