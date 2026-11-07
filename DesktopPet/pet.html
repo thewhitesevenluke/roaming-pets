@@ -81,7 +81,8 @@
 [data-pet=bunny] .ghosty{display:none}
 [data-pet=bunny] .bunny{display:inline}
 .bunny .animal-lids{transform-origin:202px 232px}
-[data-pet=bunny][data-state=walk] svg{animation:none}
+[data-pet=bunny][data-state=walk] svg{animation:bunnyTread .48s ease-in-out infinite}
+@keyframes bunnyTread{0%,100%{transform:none}50%{transform:translateY(-2px)}}
 .rabbit-ear,.rabbit-front,.rabbit-back,.rabbit-head{transition:transform .6s ease-in-out}
 .near-ear{transform-origin:181px 187px}.rear-ear{transform-origin:232px 186px}
 .rabbit-front{transform-origin:185px 317px}.rabbit-back{transform-origin:300px 295px}.rabbit-head{transform-origin:205px 268px}
@@ -134,9 +135,13 @@
 
 .travel-facing{display:block;width:100%;height:100%}
 [data-facing=right] .travel-facing{transform:scaleX(-1)}
-[data-pet=bunny][data-state=walk] .rabbit-front{animation:pawReach 1.3s ease-in-out infinite alternate}
-[data-pet=bunny][data-state=walk] .rabbit-back{animation:pawReach 1.3s ease-in-out infinite alternate-reverse}
-@keyframes pawReach{to{transform:translate(-3px,1px) rotate(4deg)}}
+[data-pet=bunny][data-state=walk] .rabbit-front{animation:pawReach .96s linear infinite}
+[data-pet=bunny][data-state=walk] .rabbit-back{animation:pawReach .96s linear -.48s infinite}
+@keyframes pawReach{
+  0%,100%{transform:translate(-8px,1px) rotate(7deg)}
+  55%{transform:translate(8px,1px) rotate(-7deg)}
+  78%{transform:translate(0,-4px)}
+}
 [data-pet=turtle][data-state=walk] .turtle-tail{transform-origin:330px 285px;animation:tailSway 2.2s ease-in-out infinite alternate}
 @keyframes tailSway{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
 </style>
