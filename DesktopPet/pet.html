@@ -1,0 +1,115 @@
+<!doctype html>
+<meta charset="utf-8"><title>Ghosty</title>
+<style>
+*{box-sizing:border-box}body{margin:0;overflow:hidden;font:13px -apple-system,sans-serif;user-select:none}
+#pet{position:absolute;inset:0;background:none;border:0;padding:12px 31px;cursor:grab;touch-action:none}
+#pet:active{cursor:grabbing}svg{width:100%;height:100%;overflow:visible;animation:bob 2.5s ease-in-out infinite}
+.asleep,.looking{display:none}
+[data-state=watch] svg,[data-state=look] svg{animation:none}
+[data-state=wake] .looking,[data-state=walk] .looking,[data-state=watch] .looking,[data-state=look] .looking{display:inline}
+[data-state=look] .eyes{animation:glance 1s ease-in-out both}
+[data-state=watch] .eyes{transform:translate(var(--gaze-x,0px),var(--gaze-y,0px));transition:transform 90ms linear}
+.lids{transform-origin:215px 137px}
+/* Eyelids move independently of the roaming window. */
+[data-state=walk] .lids{animation:blink 5.6s linear infinite}
+@keyframes blink{0%,81%,85%,100%{transform:scaleY(1)}82.6%,83.2%{transform:scaleY(.08)}}
+@keyframes glance{0%,100%{transform:translateX(0)}20%,40%{transform:translateX(-13px)}62%,82%{transform:translateX(13px)}}
+[data-state=wave] #ghost{filter:url(#wave)}
+[data-state=walk] svg{animation:glide 1.4s ease-in-out infinite alternate}
+[data-state=sleep] svg{animation:settle .55s ease-out both}
+[data-state=sleep] .asleep{display:inline;animation:closeEyes .45s ease-out both}
+[data-state=boo] svg{animation:boo .85s ease-out both}
+[data-state=wake] svg{animation:stir 1.2s ease-in-out both}
+[data-state=wake] .asleep{display:inline;animation:closeEyes .6s ease-in reverse both}
+[data-state=wake] .lids{animation:openEyes 1.2s ease-in-out both}
+@keyframes openEyes{0%,10%{transform:scaleY(.055)}100%{transform:scaleY(1)}}
+@keyframes stir{from{transform:translateY(var(--sleep-y))}to{transform:rotate(-5deg)}}
+@keyframes bob{50%{transform:translateY(-5px)}}
+@keyframes glide{from{transform:rotate(-5deg)}to{transform:translateY(-6px) rotate(4deg)}}
+@keyframes settle{from{transform:translateY(var(--sleep-y)) rotate(var(--sleep-tilt))}to{transform:translateY(var(--sleep-y))}}
+@keyframes closeEyes{from{opacity:0}to{opacity:1}}
+@keyframes boo{0%{transform:scale(.84)}28%,60%{transform:scale(1.18) rotate(-4deg)}100%{transform:scale(1)}}
+
+.ghosty{transform-origin:230px 259px;transform:scale(.86)}
+.character:not(.ghosty),.shut{display:none}
+[data-pet=bat] .ghosty,[data-pet=skeleton] .ghosty{display:none}
+[data-pet=bat] .bat,[data-pet=skeleton] .skeleton{display:inline}
+[data-state=sleep] .character .animal-lids{visibility:hidden}
+[data-state=sleep] .shut{display:inline}
+[data-state=watch] .bat-pupils{transform:translate(var(--gaze-x,0px),var(--gaze-y,0px));transition:transform .12s ease-out}
+[data-state=look] .bat-pupils{animation:batGlance 1s ease-in-out both}
+@keyframes batGlance{0%,100%{transform:none}20%,40%{transform:translateX(-3px)}62%,82%{transform:translateX(3px)}}
+.bat .animal-lids{transform-origin:230px 235px}
+.wing{transform-origin:201px 278px;animation:flap .55s ease-in-out infinite alternate}
+[data-state=wave] .wing{animation-duration:.25s}
+[data-state=sleep] .wing{animation:foldWing .8s ease-out both,dozingWing 3s .8s ease-in-out infinite}
+@keyframes foldWing{to{transform:rotate(-32deg) scale(.46,.82)}}
+@keyframes dozingWing{0%,100%{transform:rotate(-32deg) scale(.46,.82)}50%{transform:rotate(-28deg) scale(.49,.83)}}
+[data-state=sleep] .ghosty .asleep text{animation:dream 2.4s ease-out infinite}
+@keyframes dream{0%{opacity:0;transform:translateY(4px)}30%{opacity:1}100%{opacity:0;transform:translate(7px,-22px)}}
+@keyframes flap{from{transform:scaleY(.79) rotate(-8deg)}to{transform:rotate(15deg)}}
+.bat{transform-origin:230px 248px;transition:transform .65s ease-in-out}
+[data-state=sleep] .bat{transform:rotate(180deg)}
+[data-state=sleep] .bat .animal-lids{visibility:visible;animation:batClose .45s ease-out both}
+[data-state=sleep] .bat .shut{animation:closeEyes .45s ease-in both}
+@keyframes batClose{to{transform:scaleY(.04);opacity:0}}
+[data-state=wave] .bat .right{animation:batWave .32s ease-in-out infinite alternate}
+@keyframes batWave{from{transform:rotate(-15deg)}to{transform:rotate(32deg)}}
+
+.skeleton .animal-lids{transform-origin:230px 145px}
+.bone-pile{display:none}
+.sk-leg,.sk-arm{transform-origin:0 0}
+[data-state=walk] .sk-leg{animation:boneStep .48s ease-in-out alternate infinite}
+[data-state=walk] .sk-leg.second{animation-direction:alternate-reverse}
+[data-state=walk] .skull{transform-origin:230px 165px;animation:rattleWalk .48s ease-in-out alternate infinite}
+[data-pet=skeleton][data-state=walk] svg{animation:rattleStep .48s ease-in-out alternate infinite}
+[data-state=wave] .sk-arm{animation:boneWave .36s ease-in-out alternate infinite}
+[data-state=sleep] .bone-pile,[data-state=wake] .bone-pile{display:inline}
+[data-state=sleep] .bone-body{animation:foldBones .65s ease-in both}
+[data-state=wake] .bone-body{animation:foldBones 1.2s ease-out reverse both}
+[data-state=sleep] .skull{animation:pillow .75s ease-in-out both}
+[data-state=wake] .skull{animation:pillow 1.2s ease-in-out reverse both}
+[data-state=sleep] .bone-pile{animation:closeEyes .6s ease-out both}
+[data-state=wake] .bone-pile{animation:closeEyes 1s ease-out reverse both}
+[data-pet=skeleton][data-state=boo] svg{animation:rattle .14s ease-in-out alternate 6}
+@keyframes boneStep{from{transform:rotate(-7deg)}to{transform:rotate(7deg) translateY(-4px)}}
+@keyframes boneWave{from{transform:rotate(-86deg)}to{transform:rotate(-123deg)}}
+@keyframes rattleWalk{from{transform:rotate(-4deg)}to{transform:rotate(3deg) translateY(-2px)}}
+@keyframes rattleStep{to{transform:translateY(-2px)}}
+@keyframes rattle{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+@keyframes foldBones{to{transform:translateY(175px) scaleY(.46);opacity:0}}
+@keyframes pillow{to{transform:translate(32px,147px) rotate(9deg)}}
+</style>
+<body data-pet="ghosty">
+<button id="pet" aria-label="Ghosty. Click to wave, drag to move, or right-click for actions." title="Ghosty · Click to wave · Drag to move · Right-click for actions">
+<svg viewBox="0 0 460 518" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<!-- The reference background is blue-gray. Neutral white and dark ink stay opaque. -->
+<filter id="key" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  14 0 -14 1 0"/></filter>
+<image id="drawing" width="460" height="518" filter="url(#key)" xlink:href="data:image/png;base64,GHOST_IMAGE"/>
+<!-- Bend the raised hand on the continuous drawing. Neutral gray keeps the body still. -->
+<filter id="wave" x="0" y="0" width="460" height="518" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+  <feImage x="0" y="0" width="460" height="518" xlink:href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22518%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22arm%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22rgb(128%2C255%2C128)%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22rgb(128%2C128%2C128)%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22460%22%20height%3D%22518%22%20fill%3D%22rgb(128%2C128%2C128)%22%2F%3E%3Cellipse%20cx%3D%22367%22%20cy%3D%22190%22%20rx%3D%2267%22%20ry%3D%2285%22%20fill%3D%22url(%23arm)%22%2F%3E%3C%2Fsvg%3E" result="armBend"/>
+  <feDisplacementMap in="SourceGraphic" in2="armBend" xChannelSelector="R" yChannelSelector="G" scale="0">
+    <animate attributeName="scale" values="0;46;0;-30;0" dur=".68s" repeatCount="indefinite"/>
+  </feDisplacementMap>
+</filter>
+<!-- Isolate the two ink shapes from the original drawing for moving and blinking. -->
+<clipPath id="eyeArea"><path d="M154 94h46v84h-46zM236 94h45v82h-45z"/></clipPath>
+<filter id="eyeInk" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   -1.17 0 0 1.17 0"/></filter>
+</defs>
+<g class="character ghosty">
+<g id="ghost"><use xlink:href="#drawing"/></g>
+<g class="looking">
+<path fill="white" d="M154 94h46v84h-46zM236 94h45v82h-45z"/>
+<g class="eyes"><g class="lids"><use xlink:href="#drawing" clip-path="url(#eyeArea)" filter="url(#eyeInk)"/></g></g>
+</g>
+<g class="asleep"><path fill="white" d="M154 94h46v84h-46zM236 94h45v82h-45z"/>
+<path fill="none" stroke="#232023" stroke-width="7" stroke-linecap="round" d="M160 140q18 14 36 -1m45 1q16 14 32 -1"/>
+<text x="321" y="102" font-family="Georgia" font-size="39" fill="#473e53" stroke="white" stroke-width="4" paint-order="stroke">z Z</text></g>
+</g>
+BAT_ART
+SKELETON_ART
+</svg></button>
+<script>/* PET_SCRIPT */</script>
+</body>

@@ -1,0 +1,5 @@
+DESKTOP PETS FOR MAC
+
+Double-click Ghosty.app, Bat.app, or Skeleton.app to launch that pet. Open more than one to have them roam together. Each remembers its own spot. Click to wave or wake up and drag to reposition.
+
+Each pet takes short naps on its own. Right-click a pet and choose Sleep for a lasting nap, or Quit to close just that pet.

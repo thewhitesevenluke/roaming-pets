@@ -1,0 +1,51 @@
+<g class="character skeleton" stroke="#34303b" stroke-linejoin="round" stroke-linecap="round">
+  <defs>
+    <g id="longBone" fill="#e8ddbb" stroke-width="5"><path d="M-8 4Q-18-4-12-11Q-6-17 0-10Q8-16 13-9Q17-2 8 4L7 49Q19 54 12 62Q7 68 1 61Q-7 68-13 61Q-17 54-7 49Z"/></g>
+    <g id="boneFoot" fill="#eee2c8" stroke-width="5"><path d="M-6-4q-18-1-24 8q-2 7 8 8l28-1q9-1 8-9q-1-9-20-6Z"/></g>
+    <g id="skeletonLeg" transform="scale(1 .85)">
+      <use href="#longBone" transform="rotate(-3) scale(.68,.91)"/>
+      <use href="#longBone" transform="translate(3 58) rotate(3) scale(.51,.9)"/>
+      <use href="#boneFoot" transform="translate(0 117) scale(.8)"/>
+    </g>
+    <g id="skeletonArm" transform="scale(1 .9)">
+      <use href="#longBone" transform="rotate(10) scale(.55,.78)"/>
+      <use href="#longBone" transform="translate(-8 50) rotate(-4) scale(.45,.72)"/>
+      <path fill="#eee2c8" stroke-width="4" d="M-10 95q8-6 13 0l2 10-3 5-3-3-4 4-6-5Z"/>
+    </g>
+  </defs>
+  <g class="bone-body">
+    <g transform="translate(230 163) scale(.92 .88) translate(-230 -163)">
+    <g transform="translate(209 275)"><g class="sk-leg"><use href="#skeletonLeg"/></g></g>
+    <g transform="translate(251 275)"><g class="sk-leg second"><use href="#skeletonLeg" transform="scale(-1 1)"/></g></g>
+    <path fill="none" stroke-width="15" d="M230 157v109"/><path fill="none" stroke="#e7d9b8" stroke-width="7" d="M230 157v109"/>
+    <path fill="#dfd2b1" stroke-width="6" d="M192 252q18-3 38 9q20-12 38-9l-6 21-14 12-9-2-9-10-9 10-9 2-14-12Z"/>
+    <path fill="none" stroke-width="12" d="M176 178q20-11 54 1q34-12 54-1"/>
+    <path fill="none" stroke="#ebdfc5" stroke-width="6" d="M176 178q20-11 54 1q34-12 54-1"/>
+    <defs>
+      <path id="ribPairs" d="M222 193Q204 185 196 195Q192 201 198 203
+        M238 193Q256 185 264 195Q268 201 262 203
+        M223 214Q207 207 201 215Q198 220 203 222
+        M237 214Q253 207 259 215Q262 220 257 222
+        M224 235Q213 229 209 235 M236 235Q247 229 251 235"/>
+    </defs>
+    <use href="#ribPairs" fill="none" stroke="#514653" stroke-width="12"/>
+    <use href="#ribPairs" fill="none" stroke="#efe3c9" stroke-width="8"/>
+    <g transform="translate(176 178)"><use href="#skeletonArm"/></g>
+    <g transform="translate(284 178)"><g class="sk-arm"><use href="#skeletonArm" transform="scale(-1 1)"/></g></g>
+    </g>
+  </g>
+  <g class="bone-pile">
+    <g transform="translate(188 344) rotate(-72)"><use href="#longBone"/></g>
+    <g transform="translate(198 352) rotate(-101)"><use href="#longBone"/></g>
+    <g transform="translate(237 340) rotate(-68) scale(.85)"><use href="#longBone"/></g>
+    <g transform="translate(218 358) rotate(58) scale(.72)"><use href="#longBone"/></g>
+  </g>
+  <g class="skull">
+  <g transform="translate(230 163) scale(.88) translate(-230 -212)">
+    <path fill="#f1e7ce" stroke-width="8" d="M147 145C145 99 178 77 225 76C279 74 311 96 313 139Q318 177 286 187Q280 189 277 198Q275 207 266 207Q259 207 256 201Q252 214 242 212Q233 212 230 205Q226 214 216 212Q208 211 205 204Q198 211 190 205Q184 201 183 192Q148 185 147 145Z"/>
+    <g class="eyes"><g class="lids animal-lids" fill="#37303c" stroke="none"><ellipse cx="194" cy="148" rx="20" ry="19"/><ellipse cx="266" cy="148" rx="20" ry="19"/></g></g>
+    <path class="shut" fill="none" stroke-width="7" d="M175 149q19 14 38 0m34 0q19 14 38 0"/>
+    <path fill="#544753" stroke="none" d="M231 161q-4-4-7 1l-4 7q-1 5 5 4l6-2 5 2q6 1 5-4l-5-8q-2-3-5 0Z"/>
+  </g>
+  </g>
+</g>

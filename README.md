@@ -1,0 +1,24 @@
+# Roaming Pets
+
+Three little Halloween pets for your Mac. Ghosty waves and watches your cursor, Bat flies and hangs upside down to sleep, and Tiny Skeleton folds into a pile of bones to nap.
+
+## Get the pets
+
+[Download the latest release](https://github.com/thewhitesevenluke/roaming-pets/releases/latest). Choose the Halloween Pack ZIP for all three pets, or download an individual ZIP. Unzip it in Finder and double-click the app. Open multiple pets to have them roam together.
+
+Requires macOS 11 or newer. These apps are locally signed and have not been notarized by Apple. macOS may block a downloaded app. [Apple’s guide to opening downloaded apps](https://support.apple.com/en-us/102445)
+
+## Controls
+
+Click a pet to wave or wake it. Drag it to choose a spot, which it remembers on its next launch. Right-click to see its actions or quit. Each pet sometimes takes a short nap on its own. Choose Sleep to let it rest until you wake it.
+
+## Build from source
+
+On a Mac with Node.js 24 or newer and Apple Command Line Tools installed, open Terminal in the project folder and run:
+
+```sh
+cd DesktopPet
+npm run package
+```
+
+This builds Ghosty.app, Bat.app, and Skeleton.app in the parent folder.

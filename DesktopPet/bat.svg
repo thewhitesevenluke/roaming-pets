@@ -1,0 +1,28 @@
+<g class="character bat" stroke="#241e32" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <g id="batWing">
+      <path fill="#504568" d="M203 261 Q146 177 29 158 Q63 210 24 291 Q65 263 88 316 Q114 281 158 337 Q162 295 205 305 Z"/>
+      <path fill="none" stroke="#857296" stroke-width="5" d="M48 173 Q88 211 88 300 M54 177 Q131 214 154 318"/>
+    </g>
+    <clipPath id="batEyeSockets">
+      <ellipse cx="199" cy="235" rx="11" ry="15"/><ellipse cx="260" cy="235" rx="11" ry="15"/>
+    </clipPath>
+  </defs>
+  <g class="wing left"><use href="#batWing"/></g>
+  <g transform="translate(460 0) scale(-1 1)"><g class="wing right"><use href="#batWing"/></g></g>
+  <path fill="#4c435e" d="M178 265 Q160 334 197 369 L217 355 L231 377 L247 355 L265 367 Q295 321 280 266Z"/>
+  <path fill="#887792" d="M168 208 Q140 163 153 112 Q185 120 206 165 Q228 158 250 167 Q277 126 307 117 Q319 165 295 208 Q317 269 276 291 Q233 319 181 291 Q145 269 168 208Z"/>
+  <path fill="#bd93aa" stroke="none" d="M162 131 Q183 143 190 172 L169 181Z M292 138 Q277 145 267 176 L290 183Z"/>
+  <g class="lids animal-lids" stroke="none">
+    <g clip-path="url(#batEyeSockets)">
+      <rect x="186" y="218" width="87" height="34" fill="#59495e"/>
+      <g class="bat-pupils" fill="#201b28">
+        <ellipse cx="199" cy="235" rx="8.5" ry="13"/><ellipse cx="260" cy="235" rx="8.5" ry="13"/>
+      </g>
+    </g>
+  </g>
+  <path class="shut" fill="none" d="M187 235q11 10 22 0m39 0q11 10 22 0"/>
+  <path fill="#362c42" d="M222 251q9-5 18 0l-9 8z"/>
+  <path fill="none" stroke-width="4" d="M231 258v6q-7 7-14 1m14-1q7 7 14 1"/>
+  <path fill="#fff5df" stroke-width="2" d="M210 265l4 12 6-10m22 0 6 10 3-12"/>
+</g>
